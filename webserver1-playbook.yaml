@@ -1,0 +1,29 @@
+---
+- name: apache webserver installation
+  hosts: all
+  remote_user: ansible
+  become: true
+
+  tasks:
+  - name: apache installation
+    ansible.builtin.apt:
+      name: apache2
+      state: present
+
+  - name: copy apache index.html 
+    ansible.builtin.template:
+      src: /home/ansible/index.html.j2
+      dest: /var/www/html/index.html 
+    notify: 
+      - restart apache   
+
+  - name: start apache2 service
+    ansible.builtin.service:
+      name: apache2
+      state: started
+  
+  handlers: 
+    - name: start apache2 service
+      ansible.builtin.service:
+        name: apache2
+        state: restart

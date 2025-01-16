@@ -1,0 +1,20 @@
+---
+- name: usinng promts
+  hosts: Group-1
+  remote_user: ansible
+  become: true
+  vars_prompt:
+
+    - name: service 
+      prompt: which service do u want to install
+      
+  tasks:
+  - name: install service 
+    ansible.builtin.apt:
+      name: "{{service}}"
+      state: latest
+
+      
+      
+      
+      

@@ -1,0 +1,13 @@
+---
+- name: using vars
+  hosts: "{{ hosts }}"
+  remote_user: ansible
+  become: true
+  vars: 
+    user: teja
+    
+  tasks:
+  - name: variables2
+    user: shashi
+    debug:
+      msg:  "{{ user }}"

@@ -1,0 +1,14 @@
+---
+- name: create multiple users
+  hosts: all
+  remote_user: ansible
+  become: true
+
+  tasks:
+  - name: creating users
+    ansible.builtin.user:
+      name: "{{ item }}"
+      state: present
+    loop: 
+      - testuser1
+      - testuser2  

@@ -1,0 +1,33 @@
+---
+- name: installation of apache2
+  hosts: Group-1
+  remote_user: ansible
+  become: true
+
+  tasks:
+  - name: install apache2 if os is ubuntu
+    ansible.builtin.apt:
+      name: apache2
+      state: present
+    when: ansible_facts['os_family'] == "Debian"
+
+  - name: install httpd if os is centos
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+    when: ansible_facts['os_family'] == "RedHat"
+
+  - name: httpd service
+    ansible.builtin.service:
+      name: httpd
+      state: started
+    when: ansible_facts['os_family'] == "RedHat"
+
+  - name: apache service
+    ansible.builtin.service:
+      name: apache2
+      state: started
+    when: ansible_facts['os_family'] == "Debian"
+
+
+

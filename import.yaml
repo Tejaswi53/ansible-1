@@ -1,0 +1,8 @@
+---
+- name: importing playbool
+  hosts: Group-2
+  remote_user: ansible
+  become: true
+  tasks:
+  - name: importing playbook
+    ansible.builtin.import_playbook: apache.yaml
